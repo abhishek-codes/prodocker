@@ -1,9 +1,9 @@
-from django.contrib.auth.signals import user_logged_in
+# from django.contrib.auth.signals import user_logged_in
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,\
     BaseUserManager, PermissionsMixin
-from django.forms import fields
-from django.forms.fields import EmailField
+# from django.forms import fields
+# from django.forms.fields import EmailField
 # Create your models here.
 
 
