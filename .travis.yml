@@ -1,20 +1,20 @@
 language: python
 python:
-  - "3.9"
-
+- '3.9'
 services:
-  - docker
-
+- docker
 before_install:
-  - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
-
+- echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
 before_script: pip install docker-compose
-
 script:
-  - docker-compose run app sh -c "python manage.py wait_for_db && python manage.py test && flake8"
-
+- docker-compose run app sh -c "python manage.py wait_for_db && python manage.py test
+  && flake8"
 deploy:
   provider: heroku
   api_key:
-    secure: "29239e7e-a685-40f7-bedb-c59b11709b76"
-  on: main
+    secure: LL96Qy8XcWzTtmW9pCp1pAB5Z9lm87UBwy+O3DJ81wMVbzqep1OkMVxplA2fPVaI3UMozxnJf4ci8gHBQxvZ8gJkVCp3eLa4z5S9pDNZi0C85kU0a91VeGzMnSDO8X5M/+bb3gvHGBMc+UuxSiw+LH5S6EL3++5ELiHPVZ0lVEhaNKKvH/jEOuMcNKlouL9MyLvqzPogiffhAjSw1OZAVRS2uKIVq50xPTPUll8X86LuZ+QyPnzPp8QD0OU4L9mF23LVWGhdFzicsqH2JSZ8p/3EenE+eB0SmNhKFJOdMiDcyOMSBLoxK66ojg6kAztqcphqv0HNECcpaPUg5xptNnj0P3AGr+dWMS2S6DemKndB4rt+H8SOiPkOnFvXeN+5EIQNeRLkD6MVKE/J15j8w/2ue/FJlCVyoFtGGkLlGAVZ+UkdyUOHy6lvuTjngLCVAvEdILCfwkiFJcidnyJsfd63ydC0jdZHOBizCO+31oL4+ChSKjCMOQg/xIMCEQDyj4nEer7zREeZ4QUgufrCdtEfMdgJQTOcP0yyeN7KMLuAzJMeTKoQmAwqjU/qMvu0I4m58KVHO0aaD9QKkcl4/xrAJQhDu/O4JikYjjlMD2j0Dk3m0X+TEkWw4vk3c5yuY2jG+YzZHf1LL4uebLgLahzPSxob3GB/Tv6UD3pB5Sg=
+  app: prodocker
+  on:
+    repo: abhishek-codes/prodocker
+    branch: main
+  skip_cleanup: 'true'
