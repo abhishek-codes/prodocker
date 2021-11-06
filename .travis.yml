@@ -12,3 +12,8 @@ before_script: pip install docker-compose
 
 script:
   - docker-compose run app sh -c "python manage.py wait_for_db && python manage.py test && flake8"
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: "29239e7e-a685-40f7-bedb-c59b11709b76"
