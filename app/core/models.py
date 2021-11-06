@@ -9,11 +9,12 @@ from django.contrib.auth.models import AbstractBaseUser,\
 
 class UserManager(BaseUserManager):
 
-    def create_user(self, phone, **args):
+    def create_user(self, phone, password=None, **args):
         """Creates ans Saves new User"""
         if phone is None:
             raise ValueError("User must enter Phone No")
         user = self.model(phone=phone, **args)
+        user.set_password(password)
         user.save(using=self.db)
 
         return user
