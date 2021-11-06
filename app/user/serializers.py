@@ -8,10 +8,22 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ('phone', 'name', 'password')
+        extra_kwargs = {'password': {'write_only': True, 'min_length': 5}}
 
     def create(self, validate_data):
         """Create a new user"""
         return get_user_model().objects.create_user(**validate_data)
+
+    def update(self, instance, validated_data):
+        """Update a user, settings the password correctly"""
+        password = validated_data.pop('password', None)
+        user = super().update(instance, validated_data)
+
+        if password:
+            user.set_password(password)
+            user.save()
+
+        return user
 
 
 class AuthTokenSerializer(serializers.Serializer):
