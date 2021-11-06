@@ -1,9 +1,7 @@
-# from django.contrib.auth.signals import user_logged_in
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,\
     BaseUserManager, PermissionsMixin
-# from django.forms import fields
-# from django.forms.fields import EmailField
+from django.core.validators import RegexValidator
 # Create your models here.
 
 
@@ -31,7 +29,10 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     """Custom user mode that user phone no intead of username"""
-    phone = models.TextField(max_length=50, unique=True)
+    phRex = RegexValidator(
+        r'^\+[1-9]{1}[0-9]{7,16}$', message="Phone number must be entered in the \
+        format: '+999999999'. Up to 15 digits allowed.")
+    phone = models.CharField(validators=[phRex], max_length=20, unique=True)
     name = models.TextField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
