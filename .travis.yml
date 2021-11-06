@@ -17,4 +17,4 @@ deploy:
   provider: heroku
   api_key:
     secure: "29239e7e-a685-40f7-bedb-c59b11709b76"
-  on: master
+  on: main
